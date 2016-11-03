@@ -285,12 +285,10 @@ public class tela extends javax.swing.JFrame {
         t_linha2.setText("0");
         getContentPane().add(t_linha2);
         t_linha2.setBounds(411, 308, 50, 14);
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bless_logo.png"))); // NOI18N
         getContentPane().add(jLabel10);
         jLabel10.setBounds(750, 310, 210, 70);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bless.jpg.jpg"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/willreader/bless.jpg.jpg"))); // NOI18N
         jLabel9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel9);
         jLabel9.setBounds(0, 0, 970, 400);
