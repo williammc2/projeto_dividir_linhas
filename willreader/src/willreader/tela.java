@@ -1,57 +1,46 @@
 package willreader;
 
-
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 
 public class tela extends javax.swing.JFrame {
-String caminho = null;
-String caminho_juntar = null;
-String caminho_juntar2 = null;
-String caminho_save_f = null;
-String versao = null;
 
-int i = 0;
-int j =0;
-int k =0;
-int w=0;
-ArrayList<String> dadosarray = new ArrayList<>();
-ArrayList<String> dadosarray2 = new ArrayList<>();
-ArrayList<String> arrayjuntar1 = new ArrayList<>();
-ArrayList<String> arrayjuntar2 = new ArrayList<>();
-ArrayList<String> txtfinal = new ArrayList<>();
-BufferedImage imagemfundo;
+    String caminho = null;
+    String caminho_juntar = null;
+    String caminho_juntar2 = null;
+    String caminho_save_f = null;
+    String versao = null;
+
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    int w = 0;
+    ArrayList<String> dadosarray = new ArrayList<>();
+    ArrayList<String> dadosarray2 = new ArrayList<>();
+    ArrayList<String> arrayjuntar1 = new ArrayList<>();
+    ArrayList<String> arrayjuntar2 = new ArrayList<>();
+    ArrayList<String> txtfinal = new ArrayList<>();
+    BufferedImage imagemfundo;
+
     public tela() {
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -311,16 +300,16 @@ BufferedImage imagemfundo;
 
     private void botaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoActionPerformed
         // TODO add your handling code here:
-        
-        JFileChooser abrir = new JFileChooser();  
-        int retorno = abrir.showOpenDialog(null);  
 
-           if (retorno==JFileChooser.APPROVE_OPTION)  
-                   caminho = abrir.getSelectedFile().getAbsolutePath(); 
-                   filepath.setText(caminho);
-                   
-            
-        
+        JFileChooser abrir = new JFileChooser();
+        int retorno = abrir.showOpenDialog(null);
+
+        if (retorno == JFileChooser.APPROVE_OPTION) {
+            caminho = abrir.getSelectedFile().getAbsolutePath();
+        }
+        filepath.setText(caminho);
+
+
     }//GEN-LAST:event_botaoActionPerformed
 
     private void filepathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filepathActionPerformed
@@ -332,120 +321,100 @@ BufferedImage imagemfundo;
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here
 
-  	lista.setText("");
+        lista.setText("");
         lista1.setText("");
-            try {       
-                        try (FileReader arq = new FileReader(caminho)){
-                        //BufferedReader lerArq = new BufferedReader(arq);
-                        BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(caminho),"UTF-16"));
-                        String linha = (lerArq.readLine()); // lê a primeira linha
-            // a variável "linha" recebe o valor "null" quando o processo
-            // de repetição atingir o final do arquivo texto
-                        String separador = separadortxt.getText();
+        try {
+            try (FileReader arq = new FileReader(caminho)) {
+                //BufferedReader lerArq = new BufferedReader(arq);
+                BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(caminho), "UTF-16"));
+                String linha = (lerArq.readLine()); // lê a primeira linha
+                // a variável "linha" recebe o valor "null" quando o processo
+                // de repetição atingir o final do arquivo texto
+                String separador = separadortxt.getText();
 
-                    while (linha != null) {
+                while (linha != null) {
 
-                        int tamanho = linha.length(); // pega o tamanho da linha
-                        final int indexOf = linha.indexOf(separador); // pega a linha quando enconta "=="
-                        int pos = linha.indexOf(separador);
-                        final String substring = linha.substring(indexOf+1, tamanho); // atribui a variavel substring todo o texto depois do indexof baseado no tamanho da linha lida. 
-                        final String substring2 = linha.substring(0,pos+1); // atribui a variavel substring todo o texto depois do indexof baseado no tamanho da linha lida. 
-                        dadosarray.add(substring); // TESTE
-                        dadosarray2.add(substring2);
-                        i = i+1;// TESTE
-                        System.out.println("-"+substring);
-                        lista.append(substring+"\n");// adiciona a Jarea o que foi retirado da linha.
-                        lista1.append(substring2+"\n");
-                        //lista.append("\n");
-                        //System.out.printf("%s\n", linha);
+                    int tamanho = linha.length(); // pega o tamanho da linha
+                    final int indexOf = linha.indexOf(separador); // pega a linha quando enconta "=="
+                    int pos = linha.indexOf(separador);
+                    final String substring = linha.substring(indexOf + 1, tamanho); // atribui a variavel substring todo o texto depois do indexof baseado no tamanho da linha lida. 
+                    final String substring2 = linha.substring(0, pos + 1); // atribui a variavel substring todo o texto depois do indexof baseado no tamanho da linha lida. 
+                    dadosarray.add(substring);
+                    dadosarray2.add(substring2);
+                    i = i + 1;
+                    System.out.println("-" + substring);
+                    lista.append(substring + "\n");// adiciona a Jarea o que foi retirado da linha.
+                    lista1.append(substring2 + "\n");
 
-                        linha = lerArq.readLine(); // lê da segunda até a última linha
-                    } 
-                    int size = dadosarray.size();
-                    int size2 = dadosarray2.size();
-                    t_linha1.setText(String.valueOf(size));
-                    t_linha2.setText(String.valueOf(size2));
-                    JOptionPane.showMessageDialog(null,"Processo Finalizado.");
-                          arq.close();
-                            }
-                                } 
-                catch (IOException e) {
-                System.err.printf("Erro na abertura do arquivo: %s.\n",
-                  e.getMessage());
+                    linha = lerArq.readLine(); // lê da segunda até a última linha
+                }
+                int size = dadosarray.size();
+                int size2 = dadosarray2.size();
+                t_linha1.setText(String.valueOf(size));
+                t_linha2.setText(String.valueOf(size2));
+                JOptionPane.showMessageDialog(null, "Processo Finalizado.");
+                arq.close();
             }
+        } catch (IOException e) {
+            System.err.printf("Erro na abertura do arquivo: %s.\n",
+                    e.getMessage());
+        }
 
-            System.out.println();
-      
-    
+        System.out.println();
+
+
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
         // TODO add your handling code here:
-        if (versao == null){
-        
-              JOptionPane.showMessageDialog(null,"Você não selecionou a versão.");  
-        
-        }
-        else{
-         String nome2 = nome.getText();
-         JFileChooser fc = new JFileChooser();
-          final CharsetEncoder utf8 = Charset.forName( "UTF-8".intern() ).newEncoder();
-                    // restringe a amostra a diretorios apenas
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int res = fc.showOpenDialog(null);
-        if(res == JFileChooser.APPROVE_OPTION){
-        File diretorio = fc.getSelectedFile();
-        }
-        else{
-        JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum diretorio");
-        }
-        caminho = fc.getSelectedFile().getAbsolutePath(); 
-        String diretorio = caminho;
-         
-            
-            
-        OutputStreamWriter arquivo = null;
-        OutputStreamWriter arquivo2 = null;
-    try {
-        arquivo = new OutputStreamWriter( new FileOutputStream( diretorio +"/"+ nome2 + "_segunda_parte"+versao, true ), utf8 );
-        arquivo2 = new OutputStreamWriter( new FileOutputStream(diretorio +"/"+ nome2 +"_primeira_parte"+versao, true ));
-    } catch (FileNotFoundException ex) {
-        Logger.getLogger(tela.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    //writer = new FileWriter(diretorio +"/"+ nome2 + ".RUS",true);
-    //writer2 = new FileWriter(diretorio +"/"+ nome2 +"_primeira_parte.RUS",true);
-    
-    //writer = new FileWriter(diretorio +"/arquivo_para_traducao.txt",true); //cria o arquivo txt
-    JOptionPane.showMessageDialog(null, "Arquivos gerados com sucesso.");               
-                  for(int j =0; j < i; j ++){
-             try {
-                 arquivo.write( dadosarray.get(j).intern()+ "\n" );
-                 arquivo2.write( dadosarray2.get(j).intern()+ "\n" );
-             } catch (IOException ex) {
-                 Logger.getLogger(tela.class.getName()).log(Level.SEVERE, null, ex);
-             }
-                   //PrintWriter registo = new PrintWriter(writer,true);   
-                   //PrintWriter registo2 = new PrintWriter(writer2,true);  
-                   //registo.println(dadosarray.get(j));
-                   //registo2.println(dadosarray2.get(j));
-                   //j = j+1;
-                       
-                      
-                  }
-                  //PrintWriter registo = new PrintWriter(writer,true);     
-                  //registo.println(lista.getText());
+        if (versao == null) {
 
-                 try {  
-                    //writer.close();  
-                    arquivo.close();
-                    arquivo2.close();
-                } catch (IOException e2) {  
+            JOptionPane.showMessageDialog(null, "Você não selecionou a versão.");
 
-                    e2.printStackTrace();  
-                }     
-                 //registo.close();
-                 }
-         
+        } else {
+            String nome2 = nome.getText();
+            JFileChooser fc = new JFileChooser();
+            final CharsetEncoder utf8 = Charset.forName("UTF-8".intern()).newEncoder();
+            // restringe a amostra a diretorios apenas
+            fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int res = fc.showOpenDialog(null);
+            if (res == JFileChooser.APPROVE_OPTION) {
+                File diretorio = fc.getSelectedFile();
+            } else {
+                JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum diretorio");
+            }
+            caminho = fc.getSelectedFile().getAbsolutePath();
+            String diretorio = caminho;
+
+            OutputStreamWriter arquivo = null;
+            OutputStreamWriter arquivo2 = null;
+            try {
+                arquivo = new OutputStreamWriter(new FileOutputStream(diretorio + "/" + nome2 + "_segunda_parte" + versao, true), utf8);
+                arquivo2 = new OutputStreamWriter(new FileOutputStream(diretorio + "/" + nome2 + "_primeira_parte" + versao, true));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(tela.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            JOptionPane.showMessageDialog(null, "Arquivos gerados com sucesso.");
+            for (int j = 0; j < i; j++) {
+                try {
+                    arquivo.write(dadosarray.get(j).intern() + "\n");
+                    arquivo2.write(dadosarray2.get(j).intern() + "\n");
+                } catch (IOException ex) {
+                    Logger.getLogger(tela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+            try {
+                arquivo.close();
+                arquivo2.close();
+            } catch (IOException e2) {
+
+                e2.printStackTrace();
+            }
+        }
+
     }//GEN-LAST:event_salvarActionPerformed
 
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
@@ -454,132 +423,119 @@ BufferedImage imagemfundo;
 
     private void juntar_select1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_juntar_select1ActionPerformed
 
-        JFileChooser abrir = new JFileChooser();  
-        int retorno = abrir.showOpenDialog(null);  
+        JFileChooser abrir = new JFileChooser();
+        int retorno = abrir.showOpenDialog(null);
 
-           if (retorno==JFileChooser.APPROVE_OPTION)  
-                   caminho_juntar = abrir.getSelectedFile().getAbsolutePath(); 
-                   caminho1.setText(caminho_juntar);
-                   
-                   
-            try {
-        try (FileReader arq = new FileReader(caminho_juntar)){
-            //BufferedReader lerArq = new BufferedReader(arq);
-            BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(caminho_juntar),"UTF-8"));
-            String linha = (lerArq.readLine()); // lê a primeira linha
+        if (retorno == JFileChooser.APPROVE_OPTION) {
+            caminho_juntar = abrir.getSelectedFile().getAbsolutePath();
+        }
+        caminho1.setText(caminho_juntar);
+
+        try {
+            try (FileReader arq = new FileReader(caminho_juntar)) {
+                BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(caminho_juntar), "UTF-8"));
+                String linha = (lerArq.readLine()); // lê a primeira linha
 // a variável "linha" recebe o valor "null" quando o processo
 // de repetição atingir o final do arquivo texto
-        while (linha != null) {
-            arrayjuntar1.add(linha);
-            k = k+1;// TESTE
-            linha = lerArq.readLine(); // lê da segunda até a última linha
-        } 
-        JOptionPane.showMessageDialog(null,"Processo Finalizado.");
-              arq.close();
+                while (linha != null) {
+                    arrayjuntar1.add(linha);
+                    k = k + 1;
+                    linha = lerArq.readLine(); // lê da segunda até a última linha
                 }
-                    } 
-                catch (IOException e) {
-                System.err.printf("Erro na abertura do arquivo: %s.\n",
-                  e.getMessage());
+                JOptionPane.showMessageDialog(null, "Processo Finalizado.");
+                arq.close();
             }
+        } catch (IOException e) {
+            System.err.printf("Erro na abertura do arquivo: %s.\n",
+                    e.getMessage());
+        }
 
-            System.out.println();
-           
-                   
+        System.out.println();
+
+
     }//GEN-LAST:event_juntar_select1ActionPerformed
 
     private void juntar_select2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_juntar_select2ActionPerformed
 
-        JFileChooser abrir = new JFileChooser();  
-        int retorno = abrir.showOpenDialog(null);  
+        JFileChooser abrir = new JFileChooser();
+        int retorno = abrir.showOpenDialog(null);
 
-           if (retorno==JFileChooser.APPROVE_OPTION)  
-                   caminho_juntar2 = abrir.getSelectedFile().getAbsolutePath(); 
-                   caminho2.setText(caminho_juntar2);
-                   
-                    
-                   
-            try {
-        try (FileReader arq = new FileReader(caminho_juntar2)){
-            //BufferedReader lerArq = new BufferedReader(arq);
-            BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(caminho_juntar2),"UTF-8"));
-            String linha = (lerArq.readLine()); // lê a primeira linha
+        if (retorno == JFileChooser.APPROVE_OPTION) {
+            caminho_juntar2 = abrir.getSelectedFile().getAbsolutePath();
+        }
+        caminho2.setText(caminho_juntar2);
+
+        try {
+            try (FileReader arq = new FileReader(caminho_juntar2)) {
+                BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(caminho_juntar2), "UTF-8"));
+                String linha = (lerArq.readLine()); // lê a primeira linha
 // a variável "linha" recebe o valor "null" quando o processo
 // de repetição atingir o final do arquivo texto
-        while (linha != null) {
-            arrayjuntar2.add(linha);
-            w = w+1;// TESTE
-            linha = lerArq.readLine(); // lê da segunda até a última linha
-        } 
-        JOptionPane.showMessageDialog(null,"Processo Finalizado.");
-              arq.close();
+                while (linha != null) {
+                    arrayjuntar2.add(linha);
+                    w = w + 1;
+                    linha = lerArq.readLine(); // lê da segunda até a última linha
                 }
-                    } 
-                catch (IOException e) {
-                System.err.printf("Erro na abertura do arquivo: %s.\n",
-                  e.getMessage());
+                JOptionPane.showMessageDialog(null, "Processo Finalizado.");
+                arq.close();
             }
+        } catch (IOException e) {
+            System.err.printf("Erro na abertura do arquivo: %s.\n",
+                    e.getMessage());
+        }
 
-            System.out.println();
-                         
-                   
-                   
+        System.out.println();
+
+
     }//GEN-LAST:event_juntar_select2ActionPerformed
 
     private void save2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save2ActionPerformed
-         if (versao == null){
-        
-              JOptionPane.showMessageDialog(null,"Você não selecionou a versão.");  
-        
+        if (versao == null) {
+
+            JOptionPane.showMessageDialog(null, "Você não selecionou a versão.");
+
+        } else {
+            String nome3 = nome2.getText();
+            JFileChooser fc = new JFileChooser();
+            // restringe a amostra a diretorios apenas
+            fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int res = fc.showOpenDialog(null);
+            if (res == JFileChooser.APPROVE_OPTION) {
+                File diretorio = fc.getSelectedFile();
+            } else {
+                JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum diretorio");
+            }
+            caminho_save_f = fc.getSelectedFile().getAbsolutePath();
+            String diretorio = caminho_save_f;
+            //FileWriter writer = null;   
+            OutputStreamWriter arquivo = null;
+            final CharsetEncoder utf = Charset.forName("UTF-8".intern()).newEncoder();
+            try {
+                arquivo = new OutputStreamWriter(new FileOutputStream(diretorio + "/" + nome3 + versao, true), utf);
+
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(tela.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            for (int r = 0; r < k; r++) {
+
+                try {
+                    txtfinal.add(arrayjuntar1.get(r) + arrayjuntar2.get(r));//JUNTA AS Arrays
+                    arquivo.write(txtfinal.get(r).intern() + "\n");
+                } catch (IOException ex) {
+                    Logger.getLogger(tela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+            try {
+                JOptionPane.showMessageDialog(null, "Arquivo Salvo com sucesso!");
+                arquivo.close();
+            } catch (IOException e2) {
+
+                e2.printStackTrace();
+            }
         }
-         else{
-        String nome3 = nome2.getText();
-         JFileChooser fc = new JFileChooser();
-                    // restringe a amostra a diretorios apenas
-        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int res = fc.showOpenDialog(null);
-        if(res == JFileChooser.APPROVE_OPTION){
-        File diretorio = fc.getSelectedFile();
-        }
-        else{
-        JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum diretorio");
-        }
-        caminho_save_f = fc.getSelectedFile().getAbsolutePath(); 
-        String diretorio = caminho_save_f;
-        //FileWriter writer = null;   
-        OutputStreamWriter arquivo = null;
-        final CharsetEncoder utf = Charset.forName( "UTF-8".intern()).newEncoder();
-        try {
-            //writer = new FileWriter(diretorio +"/"+ nome3 + ".RUS",true);
-            arquivo = new OutputStreamWriter( new FileOutputStream(diretorio +"/"+ nome3 + versao, true ), utf);
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(tela.class.getName()).log(Level.SEVERE, null, ex);
-        }             
-                  
-                        for(int r =0; r < k; r ++){
-           // PrintWriter registo = new PrintWriter(writer,true);  
-
-                     try {
-                txtfinal.add(arrayjuntar1.get(r) + arrayjuntar2.get(r));//JUNTA AS Arrays
-               //arquivo.write( rg1 + rg2 + "\n".intern() );
-               //registo.println(txtfinal.get(r));
-               arquivo.write( txtfinal.get(r).intern()+ "\n" );
-           } catch (IOException ex) {
-               Logger.getLogger(tela.class.getName()).log(Level.SEVERE, null, ex);
-           }
-
-         }  
-                        
-                         try {  
-                    //writer.close();  
-                    JOptionPane.showMessageDialog(null, "Arquivo Salvo com sucesso!");
-                    arquivo.close();
-                } catch (IOException e2) {  
-
-                    e2.printStackTrace();  
-                }   
-         }
     }//GEN-LAST:event_save2ActionPerformed
 
     private void separadortxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_separadortxtActionPerformed
