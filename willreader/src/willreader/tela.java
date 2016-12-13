@@ -80,6 +80,8 @@ public class tela extends javax.swing.JFrame {
         qt_linha2 = new javax.swing.JLabel();
         t_linha2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        cod = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -288,6 +290,20 @@ public class tela extends javax.swing.JFrame {
         getContentPane().add(jLabel10);
         jLabel10.setBounds(750, 310, 210, 70);
 
+        cod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "","UTF-8", "UTF-16"}));
+        cod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cod);
+        cod.setBounds(520, 10, 90, 20);
+
+        jLabel11.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel11.setText("Selecione a Codificação");
+        getContentPane().add(jLabel11);
+        jLabel11.setBounds(620, 10, 170, 20);
+
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/willreader/bless.jpg.jpg"))); // NOI18N
         jLabel9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(jLabel9);
@@ -324,7 +340,7 @@ public class tela extends javax.swing.JFrame {
         try {
             try (FileReader arq = new FileReader(caminho)) {
                 //BufferedReader lerArq = new BufferedReader(arq);
-                BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(caminho), "UTF-16"));
+                BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(caminho), (String) cod.getSelectedItem()));
                 String linha = (lerArq.readLine()); // lê a primeira linha
                 // a variável "linha" recebe o valor "null" quando o processo
                 // de repetição atingir o final do arquivo texto
@@ -545,6 +561,10 @@ public class tela extends javax.swing.JFrame {
         versao = (String) select_versao.getSelectedItem();
     }//GEN-LAST:event_select_versaoActionPerformed
 
+    private void codActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -584,9 +604,11 @@ public class tela extends javax.swing.JFrame {
     private javax.swing.JButton botao;
     private javax.swing.JTextField caminho1;
     private javax.swing.JTextField caminho2;
+    private javax.swing.JComboBox<String> cod;
     private javax.swing.JTextField filepath;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
